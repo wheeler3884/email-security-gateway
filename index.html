@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CACTER邮件安全网关系统</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧系统导航栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>CACTER邮件安全网关系统</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-server"></i>
+                            <span>系统状态</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-eye"></i>
+                            <span>监控中心</span>
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-filter"></i>
+                            <span>过滤规则</span>
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>统计报表</span>
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>日志查看</span>
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </a>
+                        <ul class="sub-nav">
+                            <li class="sub-nav-item active">
+                                <a href="#">邮件设备日志</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a href="#">恶意邮件日志</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a href="#">链接防护日志</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a href="#">认证日志</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a href="#">系统通知日志</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a href="#">管理员操作日志</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-envelope"></i>
+                            <span>邮件投递</span>
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="collapse-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="user-info">
+                    <span>chenhaojun@coremail.cn</span>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <!-- 功能页面 -->
+                <div class="function-content">
+                    <!-- 邮件信息概览 -->
+                    <section class="module" id="email-info">
+                        <div class="module-header">
+                            <h2>邮件信息概览</h2>
+                            <button class="return-btn">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>返回</span>
+                            </button>
+                        </div>
+                        <div class="module-body">
+                            <div class="info-section">
+                                <div class="info-row">
+                                    <label>执行动作:</label>
+                                    <span class="action-tag">阻断</span>
+                                </div>
+                                <div class="info-row">
+                                    <label>主题:</label>
+                                    <span>**TOP URGENT**SEA LADY - New Inquiry</span>
+                                </div>
+                                <div class="info-row">
+                                    <label>发件人:</label>
+                                    <span class="email">dcss.eng.ps@damen.com</span>
+                                </div>
+                                <div class="info-row">
+                                    <label>收件人:</label>
+                                    <span>support@coremail.cn</span>
+                                    <a href="#" class="text-link">查看邮件原文</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 检测分析 -->
+                    <section class="module" id="detection-analysis">
+                        <div class="module-header">
+                            <h2>检测分析</h2>
+                        </div>
+                        <div class="module-body">
+                            <!-- 综合引擎检测 -->
+                            <div class="detection-submodule" id="comprehensive-detection">
+                                <div class="detection-item">
+                                    <span class="detection-logo">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </span>
+                                    <span class="detection-tag danger">综合引擎检测</span>
+                                </div>
+                                <div class="detection-item">
+                                    <span class="detection-logo"></span>
+                                    <span class="detection-tag white-bg">普通垃圾</span>
+                                </div>
+                            </div>
+                            
+                            <!-- 大模型检测 -->
+                            <div class="detection-submodule" id="model-detection">
+                                <div class="detection-item">
+                                    <span class="detection-logo">
+                                        <i class="fas fa-brain"></i>
+                                    </span>
+                                    <span class="detection-tag">大模型检测</span>
+                                </div>
+                            </div>
+                            
+                            <!-- URL沙箱检测 -->
+                            <div class="detection-submodule" id="url-detection">
+                                <div class="detection-item">
+                                    <span class="detection-logo">
+                                        <i class="fas fa-box"></i>
+                                    </span>
+                                    <span class="detection-tag">URL沙箱检测</span>
+                                </div>
+                            </div>
+                            
+                            <!-- 自定义策略扫描 -->
+                            <div class="detection-submodule" id="custom-rules-detection">
+                                <div class="detection-item">
+                                    <span class="detection-logo">
+                                        <i class="fas fa-cog"></i>
+                                    </span>
+                                    <span class="detection-tag success">自定义策略扫描</span>
+                                </div>
+                                <div class="detection-item">
+                                    <span class="detection-logo"></span>
+                                    <span class="detection-tag white-bg">检测通过</span>
+                                </div>
+                            </div>
+                            
+                            <!-- 反病毒引擎检测 -->
+                            <div class="detection-submodule" id="antivirus-detection">
+                                <div class="detection-item">
+                                    <span class="detection-logo">
+                                        <i class="fas fa-virus"></i>
+                                    </span>
+                                    <span class="detection-tag danger">反病毒引擎检测</span>
+                                </div>
+                                <div class="detection-table">
+                                    <div class="table-header">
+                                        <div class="table-cell">威胁等级</div>
+                                        <div class="table-cell">威胁类型</div>
+                                        <div class="table-cell">来源附件</div>
+                                        <div class="table-cell">附件MD5</div>
+                                    </div>
+                                    <div class="table-row">
+                                        <div class="table-cell">无</div>
+                                        <div class="table-cell">无</div>
+                                        <div class="table-cell">MV SEA LADY VESSEL DETAILS.zip</div>
+                                        <div class="table-cell">a9e912b50c9e2b84954fb90a900c5a</div>
+                                    </div>
+                                    <div class="table-footer">
+                                        <div class="pagination">
+                                            <span class="pagination-left">&lt;</span>
+                                            <span class="pagination-current">1</span>
+                                            <span class="pagination-right">&gt;</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 沙箱检测 -->
+                            <div class="detection-submodule" id="sandbox-detection">
+                                <div class="detection-item">
+                                    <span class="detection-logo">
+                                        <i class="fas fa-box"></i>
+                                    </span>
+                                    <span class="detection-tag danger">沙箱检测</span>
+                                </div>
+                                <div class="detection-table">
+                                    <div class="table-header">
+                                        <div class="table-cell">威胁等级</div>
+                                        <div class="table-cell">威胁类型</div>
+                                        <div class="table-cell">来源附件</div>
+                                        <div class="table-cell">附件MD5</div>
+                                    </div>
+                                    <div class="table-row">
+                                        <div class="table-cell">高危</div>
+                                        <div class="table-cell">蠕虫</div>
+                                        <div class="table-cell">MV SEA LADY VESSEL DETAILS.zip</div>
+                                        <div class="table-cell">a9e912b50c9e2b84954fb90a900c5a</div>
+                                    </div>
+                                    <div class="table-footer">
+                                        <div class="pagination">
+                                            <span class="pagination-left">&lt;</span>
+                                            <span class="pagination-current">1</span>
+                                            <span class="pagination-right">&gt;</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 执行动作 -->
+                            <div class="detection-submodule" id="action">
+                                <div class="detection-item">
+                                    <span class="detection-logo">
+                                        <i class="fas fa-play"></i>
+                                    </span>
+                                    <span class="detection-tag selected-card" id="selected-card">执行动作</span>
+                                </div>
+                                <div class="detection-item">
+                                    <span class="detection-logo"></span>
+                                    <span class="action-tag">阻断</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="module" id="email-info-detail">
+                        <div class="module-header">
+                            <h2>邮件信息</h2>
+                        </div>
+                        <div class="module-body">
+                            <div class="email-info-table">
+                                <table>
+                                    <tr>
+                                        <td>id</td>
+                                        <td>____WCHN/7R5p59pGPM4--366552</td>
+                                    </tr>
+                                    <tr>
+                                        <td>邮件ID</td>
+                                        <td>____WCHN/7R5p59pGPM4--366552@support.coremail.cn</td>
+                                    </tr>
+                                    <tr>
+                                        <td>集群节点</td>
+                                        <td>node2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>收发时间</td>
+                                        <td>2026-02-25 05:51:07</td>
+                                    </tr>
+                                    <tr>
+                                        <td>收发类型</td>
+                                        <td>接收</td>
+                                    </tr>
+                                    <tr>
+                                        <td>信头</td>
+                                        <td>Received from [77.82.39.151] (unknown [77.82.39.151]) by cloud-imapx-10 (Coremail) with SMTP id A4QA4kA2v835p0fM--A028352; Wed, 25 Feb 2026 05:52:44 +0800 (CST). <a href="#" class="text-link">展开</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>发件人</td>
+                                        <td>dcss.eng.ps@damen.com <a href="#" class="text-link">白名单</a> <a href="#" class="text-link">黑名单</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>发件IP</td>
+                                        <td>77.82.39.151 <a href="#" class="text-link">白名单</a> <a href="#" class="text-link">黑名单</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>IP归属地</td>
+                                        <td>乌兹别克</td>
+                                    </tr>
+                                    <tr>
+                                        <td>信头发件人</td>
+                                        <td>DCSS.Eng.PS@damen.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>收件人</td>
+                                        <td>support@coremail.cn</td>
+                                    </tr>
+                                    <tr>
+                                        <td>信头收件人</td>
+                                        <td>support@coremail.cn</td>
+                                    </tr>
+                                    <tr>
+                                        <td>主题</td>
+                                        <td>**TOP URGENT**SEA LADY - New Inquiry</td>
+                                    </tr>
+                                    <tr>
+                                        <td>URL</td>
+                                        <td>http://damen.com/</td>
+                                    </tr>
+                                    <tr>
+                                        <td>附件</td>
+                                        <td>
+                                            <div class="attachment-table">
+                                                <table>
+                                                    <tr>
+                                                        <th>序号</th>
+                                                        <th>附件名</th>
+                                                        <th>附件类型</th>
+                                                        <th>附件MD5</th>
+                                                        <th>加密附件</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>MV SEA LADY VESSEL DETAILS.zip</td>
+                                                        <td>application/zip</td>
+                                                        <td>a9e912b50c9e2b84954fb90a900c5a</td>
+                                                        <td>不加密</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>邮件大小</td>
+                                        <td>888.0 KB (0.031 字节)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>执行动作</td>
+                                        <td>阻断</td>
+                                    </tr>
+                                    <tr>
+                                        <td>原因</td>
+                                        <td>病毒检测</td>
+                                    </tr>
+                                    <tr>
+                                        <td>邮件类型</td>
+                                        <td>病毒邮件</td>
+                                    </tr>
+                                    <tr>
+                                        <td>邮件评分</td>
+                                        <td>0.88</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="module" id="email-content">
+                        <div class="module-header">
+                            <h2>邮件原文</h2>
+                            <button class="download-btn">
+                                <i class="fas fa-download"></i>
+                                <span>下载附件</span>
+                            </button>
+                        </div>
+                        <div class="module-body">
+                            <div class="email-blocked">
+                                <span>邮件已阻断</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="module" id="email-log">
+                        <div class="module-header">
+                            <h2>邮件日志</h2>
+                            <button class="download-log-btn">
+                                <span>下载日志</span>
+                            </button>
+                        </div>
+                        <div class="module-body">
+                            <div class="log-content">
+                                <pre>{
+  "natLog": [...], 32 items
+  "log": [...], 42 items
+  "metaLog": [...], 8 items
+  "dialLog": [...], 16 items
+  "dataTrack": [...], 6 items
+}</pre>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- 右侧功能导航栏 -->
+                <aside class="function-sidebar">
+                    <ul class="function-nav">
+                        <li class="function-nav-item active">
+                            <a href="#email-info">邮件信息概览</a>
+                        </li>
+                        <li class="function-nav-item">
+                            <a href="#detection-analysis">检测分析</a>
+                        </li>
+                        <li class="function-nav-item sub-item">
+                            <a href="#comprehensive-detection">综合引擎检测</a>
+                            <span class="status-indicator danger"></span>
+                        </li>
+                        <li class="function-nav-item sub-item">
+                            <a href="#model-detection">大模型检测</a>
+                        </li>
+                        <li class="function-nav-item sub-item">
+                            <a href="#url-detection">URL沙箱检测</a>
+                            <span class="status-indicator danger"></span>
+                        </li>
+                        <li class="function-nav-item sub-item">
+                            <a href="#custom-rules-detection">自定义策略扫描</a>
+                            <span class="status-indicator success"></span>
+                        </li>
+                        <li class="function-nav-item sub-item">
+                            <a href="#antivirus-detection">反病毒引擎检测</a>
+                            <span class="status-indicator danger"></span>
+                        </li>
+                        <li class="function-nav-item sub-item">
+                            <a href="#sandbox-detection">沙箱检测</a>
+                            <span class="status-indicator danger"></span>
+                        </li>
+                        <li class="function-nav-item sub-item">
+                            <a href="#action">执行动作</a>
+                            <span class="status-indicator danger"></span>
+                        </li>
+                        <li class="function-nav-item">
+                            <a href="#email-info-detail">邮件信息</a>
+                        </li>
+                        <li class="function-nav-item">
+                            <a href="#email-content">邮件原文</a>
+                        </li>
+                        <li class="function-nav-item">
+                            <a href="#email-log">邮件日志</a>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

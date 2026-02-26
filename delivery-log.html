@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邮件投递日志 - CACTER邮件安全网关系统</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧系统导航栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>CACTER邮件安全网关系统</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-server"></i>
+                            <span>系统状态</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-eye"></i>
+                            <span>监控中心</span>
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-filter"></i>
+                            <span>过滤规则</span>
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>统计报表</span>
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>日志查看</span>
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </a>
+                        <ul class="sub-nav" style="max-height: 0;">
+                            <li class="sub-nav-item">
+                                <a href="#">邮件设备日志</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a href="#">恶意邮件日志</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a href="#">链接防护日志</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a href="#">认证日志</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a href="#">系统通知日志</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a href="#">管理员操作日志</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-envelope"></i>
+                            <span>邮件投递</span>
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </a>
+                        <ul class="sub-nav" style="max-height: 200px;">
+                            <li class="sub-nav-item active">
+                                <a href="delivery-log.html">邮件投递日志</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a href="#">策略管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="collapse-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="user-info">
+                    <span>chenhaojun@coremail.cn</span>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <!-- 功能页面 -->
+                <div class="function-content">
+                    <!-- 邮件投递日志 -->
+                    <section class="module" id="delivery-log">
+                        <div class="module-header">
+                            <h2>邮件投递日志</h2>
+                            <div class="header-right">
+                                <button class="export-btn">
+                                    <i class="fas fa-download"></i>
+                                    <span>导出</span>
+                                </button>
+                                <button class="settings-btn">
+                                    <i class="fas fa-cog"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="module-body">
+                            <!-- 搜索过滤区域 -->
+                            <div class="search-filter">
+                                <!-- 普通搜索模式 -->
+                                <div class="search-mode normal-search">
+                                    <div class="filter-row">
+                                        <div class="filter-item compact">
+                                            <label>收发时间区间:</label>
+                                            <input type="text" value="2026-02-26 00:00:00" class="time-input">
+                                            <span>→</span>
+                                            <input type="text" value="2026-02-26 23:59:59" class="time-input">
+                                        </div>
+                                        <div class="filter-item compact">
+                                            <label>收发类型:</label>
+                                            <input type="text" class="text-input">
+                                        </div>
+                                        <div class="filter-item compact">
+                                            <label>发信IP:</label>
+                                            <input type="text" class="text-input">
+                                        </div>
+                                    </div>
+                                    <div class="filter-row">
+                                        <div class="filter-item compact">
+                                            <label>IP归属地:</label>
+                                            <input type="text" class="text-input">
+                                        </div>
+                                        <div class="filter-item compact">
+                                            <label>发信人:</label>
+                                            <input type="text" class="text-input">
+                                        </div>
+                                        <div class="filter-item compact">
+                                            <label>收信人:</label>
+                                            <input type="text" class="text-input">
+                                        </div>
+                                    </div>
+                                    <div class="filter-row">
+                                        <div class="filter-item compact">
+                                            <label>主题:</label>
+                                            <input type="text" class="text-input">
+                                        </div>
+                                        <div class="filter-item compact">
+                                            <label>执行动作:</label>
+                                            <select class="select-input">
+                                                <option>请选择</option>
+                                            </select>
+                                        </div>
+                                        <div class="filter-item compact">
+                                            <label>原因:</label>
+                                            <input type="text" class="text-input">
+                                        </div>
+                                    </div>
+                                    <div class="filter-row justify-between">
+                                        <div class="filter-items-group">
+                                            <div class="filter-item compact">
+                                                <label>邮件类型:</label>
+                                                <select class="select-input">
+                                                    <option>请选择</option>
+                                                </select>
+                                            </div>
+                                            <div class="filter-item compact">
+                                                <label>投递状态:</label>
+                                                <select class="select-input">
+                                                    <option>请选择</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="filter-actions compact">
+                                            <button class="reset-btn">重置</button>
+                                            <button class="search-btn">查询</button>
+                                            <button class="advanced-btn">高级搜索模式切换</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 高级搜索模式 -->
+                                <div class="search-mode advanced-search" style="display: none;">
+                                    <div class="filter-row">
+                                        <div class="filter-item">
+                                            <label>收发时间区间:</label>
+                                            <select class="select-input">
+                                                <option>今天</option>
+                                                <option>昨天</option>
+                                                <option>近7天</option>
+                                                <option>近30天</option>
+                                                <option>自定义</option>
+                                            </select>
+                                            <input type="text" value="2026-02-26 00:00:00" class="time-input">
+                                            <span>→</span>
+                                            <input type="text" value="2026-02-26 23:59:59" class="time-input">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </div>
+                                        <div class="filter-item">
+                                            <label>收发类型:</label>
+                                            <input type="text" class="text-input">
+                                        </div>
+                                    </div>
+                                    <div class="filter-row">
+                                        <div class="filter-item">
+                                            <label>tid：</label>
+                                            <input type="text" class="text-input">
+                                        </div>
+                                        <div class="filter-item">
+                                            <label>集群节点:</label>
+                                            <select class="select-input">
+                                                <option>node1</option>
+                                                <option>node2</option>
+                                                <option>node3</option>
+                                                <option>node4</option>
+                                                <option>node5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="filter-row condition-row">
+                                        <div class="condition-label">条件关系"且":</div>
+                                        <div class="condition-content">
+                                            <select class="select-input condition-select">
+                                                <option>选择条件</option>
+                                                <option>发信IP</option>
+                                                <option>IP归属地</option>
+                                                <option>海外邮件</option>
+                                                <option>发件人</option>
+                                                <option>信头发件人</option>
+                                                <option>收件人</option>
+                                                <option>信头收件人</option>
+                                                <option>主题</option>
+                                                <option>沙箱检测</option>
+                                            </select>
+                                            <!-- 匹配类型选择框和输入框 -->
+                                            <div class="condition-options" style="display: none;">
+                                                <select class="select-input match-type-select">
+                                                    <option>选择匹配类型</option>
+                                                    <option>完全匹配</option>
+                                                    <option>部分匹配</option>
+                                                    <option>不匹配</option>
+                                                </select>
+                                                <input type="text" class="text-input condition-input" placeholder="请输入搜索内容">
+                                            </div>
+                                            <div class="condition-buttons">
+                                                <button class="add-condition-btn">+</button>
+                                                <button class="remove-condition-btn" style="display: none;">-</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 条件行容器 -->
+                                    <div class="condition-rows-container" data-condition-type="and">
+                                    </div>
+                                    <div class="filter-row condition-row">
+                                        <div class="condition-label">条件关系"或":</div>
+                                        <div class="condition-content">
+                                            <select class="select-input condition-select">
+                                                <option>选择条件</option>
+                                                <option>发信IP</option>
+                                                <option>IP归属地</option>
+                                                <option>海外邮件</option>
+                                                <option>发件人</option>
+                                                <option>信头发件人</option>
+                                                <option>收件人</option>
+                                                <option>信头收件人</option>
+                                                <option>主题</option>
+                                                <option>沙箱检测</option>
+                                            </select>
+                                            <!-- 匹配类型选择框和输入框 -->
+                                            <div class="condition-options" style="display: none;">
+                                                <select class="select-input match-type-select">
+                                                    <option>选择匹配类型</option>
+                                                    <option>完全匹配</option>
+                                                    <option>部分匹配</option>
+                                                    <option>不匹配</option>
+                                                </select>
+                                                <input type="text" class="text-input condition-input" placeholder="请输入搜索内容">
+                                            </div>
+                                            <div class="condition-buttons">
+                                                <button class="add-condition-btn">+</button>
+                                                <button class="remove-condition-btn" style="display: none;">-</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 条件行容器 -->
+                                    <div class="condition-rows-container" data-condition-type="or">
+                                    </div>
+                                    <div class="filter-row">
+                                        <div class="filter-actions">
+                                            <button class="reset-btn">重置</button>
+                                            <button class="search-btn">查询</button>
+                                            <button class="advanced-btn">普通搜索模式切换</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 日志列表 -->
+                            <div class="log-list">
+                                <table class="log-table">
+                                    <thead>
+                                        <tr>
+                                            <th>时间</th>
+                                            <th>收发类型</th>
+                                            <th>发送IP</th>
+                                            <th>IP归属地</th>
+                                            <th>发信人</th>
+                                            <th>收信人</th>
+                                            <th>主题</th>
+                                            <th>邮件评分</th>
+                                            <th>执行动作</th>
+                                            <th>原因</th>
+                                            <th>邮件类型</th>
+                                            <th>投递状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>2026-02-25 17:02:47</td>
+                                            <td>接收</td>
+                                            <td>220.248.11.33</td>
+                                            <td>中国大连</td>
+                                            <td>marketing@coremail.cn</td>
+                                            <td>support@coremail.cn</td>
+                                            <td>[学习] 2026年Q1邮件安全趋势报告</td>
+                                            <td>0.64</td>
+                                            <td><span class="action-tag">接收</span></td>
+                                            <td>正常收件人</td>
+                                            <td>一般普通邮件</td>
+                                            <td>已投递</td>
+                                            <td>
+                                                <a href="http://localhost:3000/" class="text-link">查看</a>
+                                                <a href="#" class="text-link">下载</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2026-02-25 12:24:35</td>
+                                            <td>接收</td>
+                                            <td>91.219.140.236</td>
+                                            <td>俄罗斯</td>
+                                            <td>-</td>
+                                            <td>noreply@coremail.cn</td>
+                                            <td>Undelivered: ***TOP URGENT***SEA LADY - New Inquiry</td>
+                                            <td>0.93</td>
+                                            <td><span class="action-tag danger">阻断</span></td>
+                                            <td>邮件中病毒特征检测</td>
+                                            <td>病毒邮件</td>
+                                            <td>-</td>
+                                            <td>
+                                                <a href="http://localhost:3000/" class="text-link">查看</a>
+                                                <a href="#" class="text-link">下载</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2026-02-25 10:12:04</td>
+                                            <td>接收</td>
+                                            <td>91.219.142.236</td>
+                                            <td>俄罗斯</td>
+                                            <td>-</td>
+                                            <td>noreply@coremail.cn</td>
+                                            <td>Undelivered: ***TOP URGENT***SEA LADY - New Inquiry</td>
+                                            <td>0.93</td>
+                                            <td><span class="action-tag danger">阻断</span></td>
+                                            <td>邮件中病毒特征检测</td>
+                                            <td>垃圾邮件</td>
+                                            <td>-</td>
+                                            <td>
+                                                <a href="http://localhost:3000/" class="text-link">查看</a>
+                                                <a href="#" class="text-link">下载</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2026-02-25 09:30:45</td>
+                                            <td>接收</td>
+                                            <td>91.219.142.236</td>
+                                            <td>俄罗斯</td>
+                                            <td>-</td>
+                                            <td>noreply@coremail.cn</td>
+                                            <td>Undelivered: ***TOP URGENT***SEA LADY - New Inquiry</td>
+                                            <td>0.93</td>
+                                            <td><span class="action-tag danger">阻断</span></td>
+                                            <td>邮件中病毒特征检测</td>
+                                            <td>钓鱼邮件</td>
+                                            <td>-</td>
+                                            <td>
+                                                <a href="http://localhost:3000/" class="text-link">查看</a>
+                                                <a href="#" class="text-link">下载</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                                <!-- 分页 -->
+                                <div class="pagination">
+                                    <span class="pagination-info">共 123 条记录</span>
+                                    <div class="pagination-controls">
+                                        <button class="page-btn disabled">上一页</button>
+                                        <button class="page-btn active">1</button>
+                                        <button class="page-btn">2</button>
+                                        <button class="page-btn">3</button>
+                                        <span class="page-ellipsis">...</span>
+                                        <button class="page-btn">13</button>
+                                        <button class="page-btn">下一页</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
