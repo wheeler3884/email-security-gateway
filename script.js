@@ -325,164 +325,31 @@ window.addEventListener('DOMContentLoaded', function() {
                     `;
                     conditionOptions.style.display = 'flex';
                 } else if (this.value === '沙箱检测') {
-                    // 沙箱检测的特殊处理 - 实现多选功能
+                    // 沙箱检测的特殊处理 - 仅显示二级选择框，不再显示三级选择框
                     conditionOptions.innerHTML = `
                         <select class="select-input sandbox-type-select">
                             <option>选择沙箱检测类型</option>
-                            <option>威胁等级</option>
-                            <option>威胁分类</option>
+                            <option>进行过沙箱检查</option>
+                            <option>没有进行过沙箱检查</option>
                         </select>
-                        <div class="sandbox-value-container" style="display: none;">
+                        <!-- 三级选择框已禁用，以下代码注释保留以便后续可能的功能恢复 -->
+                        <!-- <div class="sandbox-value-container" style="display: none;">
                             <div class="multi-select-container">
                                 <div class="multi-select-input" placeholder="请选择值">
                                     <div class="selected-values"></div>
                                 </div>
                                 <div class="multi-select-dropdown" style="display: none;"></div>
                             </div>
-                        </div>
+                        </div> -->
                     `;
                     conditionOptions.style.display = 'flex';
                     
                     // 为沙箱检测类型选择框添加事件监听
                     const sandboxTypeSelect = conditionOptions.querySelector('.sandbox-type-select');
-                    const sandboxValueContainer = conditionOptions.querySelector('.sandbox-value-container');
                     
                     sandboxTypeSelect.addEventListener('change', function() {
-                        if (this.value === '威胁等级' || this.value === '威胁分类') {
-                            sandboxValueContainer.style.display = 'block';
-                            
-                            // 初始化多选组件
-                            const multiSelectContainer = sandboxValueContainer.querySelector('.multi-select-container');
-                            const multiSelectInput = multiSelectContainer.querySelector('.multi-select-input');
-                            const multiSelectDropdown = multiSelectContainer.querySelector('.multi-select-dropdown');
-                            const selectedValues = multiSelectContainer.querySelector('.selected-values');
-                            
-                            // 清空之前的内容
-                            multiSelectDropdown.innerHTML = '';
-                            selectedValues.innerHTML = '';
-                            
-                            // 添加占位符文本
-                            const placeholderText = document.createElement('span');
-                            placeholderText.className = 'placeholder-text';
-                            placeholderText.textContent = multiSelectInput.getAttribute('placeholder');
-                            selectedValues.appendChild(placeholderText);
-                            
-                            // 根据选择的类型填充选项
-                            let options = [];
-                            if (this.value === '威胁等级') {
-                                options = [
-                                    { value: '0', text: '安全' },
-                                    { value: '1', text: '低风险' },
-                                    { value: '2', text: '中风险' },
-                                    { value: '3', text: '高风险' }
-                                ];
-                            } else if (this.value === '威胁分类') {
-                                options = [
-                                    { value: '0', text: '未定义' },
-                                    { value: '1', text: '病毒' },
-                                    { value: '2', text: '蠕虫' },
-                                    { value: '3', text: '木马' },
-                                    { value: '4', text: '后门' },
-                                    { value: '5', text: '漏洞' },
-                                    { value: '6', text: '黑客工具' },
-                                    { value: '7', text: '恶意软件' },
-                                    { value: '8', text: '广告软件' },
-                                    { value: '9', text: '色情' },
-                                    { value: '10', text: '风险软件' },
-                                    { value: '11', text: '间谍软件' },
-                                    { value: '12', text: '勒索者病毒' }
-                                ];
-                            }
-                            
-                            // 填充下拉选项
-                            options.forEach(option => {
-                                const optionElement = document.createElement('div');
-                                optionElement.className = 'multi-select-option';
-                                optionElement.dataset.value = option.value;
-                                optionElement.innerHTML = `
-                                    <input type="checkbox" value="${option.value}">
-                                    <span>${option.text}</span>
-                                `;
-                                multiSelectDropdown.appendChild(optionElement);
-                            });
-                            
-                            // 点击输入框显示/隐藏下拉菜单
-                            multiSelectInput.addEventListener('click', function() {
-                                multiSelectDropdown.style.display = multiSelectDropdown.style.display === 'none' ? 'block' : 'none';
-                            });
-                            
-                            // 点击选项进行选择
-                                multiSelectDropdown.addEventListener('change', function(e) {
-                                    if (e.target.type === 'checkbox') {
-                                        const value = e.target.value;
-                                        const text = e.target.nextElementSibling.textContent;
-                                        
-                                        if (e.target.checked) {
-                                            // 添加选中值
-                                            const selectedItem = document.createElement('div');
-                                            selectedItem.className = 'selected-item';
-                                            selectedItem.dataset.value = value;
-                                            selectedItem.innerHTML = `
-                                                <span>${text}</span>
-                                                <button class="remove-selected">&times;</button>
-                                            `;
-                                            selectedValues.appendChild(selectedItem);
-                                            
-                                            // 移除按钮事件
-                                            selectedItem.querySelector('.remove-selected').addEventListener('click', function() {
-                                                selectedItem.remove();
-                                                // 取消对应的复选框
-                                                const checkbox = multiSelectDropdown.querySelector(`input[value="${value}"]`);
-                                                if (checkbox) {
-                                                    checkbox.checked = false;
-                                                }
-                                                // 更新输入框显示
-                                                updateMultiSelectInput();
-                                            });
-                                        } else {
-                                            // 移除选中值
-                                            const selectedItem = selectedValues.querySelector(`[data-value="${value}"]`);
-                                            if (selectedItem) {
-                                                selectedItem.remove();
-                                            }
-                                        }
-                                        
-                                        // 更新输入框显示
-                                        updateMultiSelectInput();
-                                    }
-                                });
-                                
-                                // 更新多选输入框显示
-                                function updateMultiSelectInput() {
-                                    const selectedItems = selectedValues.querySelectorAll('.selected-item');
-                                    if (selectedItems.length === 0) {
-                                        // 如果没有选中项，显示占位符
-                                        if (selectedValues.children.length === 0) {
-                                            const placeholderText = document.createElement('span');
-                                            placeholderText.className = 'placeholder-text';
-                                            placeholderText.textContent = multiSelectInput.getAttribute('placeholder');
-                                            selectedValues.appendChild(placeholderText);
-                                        }
-                                        multiSelectInput.style.color = '#999';
-                                    } else {
-                                        // 如果有选中项，移除占位符
-                                        const placeholderText = selectedValues.querySelector('.placeholder-text');
-                                        if (placeholderText) {
-                                            placeholderText.remove();
-                                        }
-                                        multiSelectInput.style.color = '#333';
-                                    }
-                                }
-                            
-                            // 点击外部关闭下拉菜单
-                            document.addEventListener('click', function(e) {
-                                if (!multiSelectContainer.contains(e.target)) {
-                                    multiSelectDropdown.style.display = 'none';
-                                }
-                            });
-                        } else {
-                            sandboxValueContainer.style.display = 'none';
-                        }
+                        // 仅处理二级选择框的选择，不再显示三级选择框
+                        console.log('沙箱检测类型已选择:', this.value);
                     });
                 } else {
                     conditionOptions.style.display = 'none';
@@ -554,164 +421,31 @@ window.addEventListener('DOMContentLoaded', function() {
                         `;
                         conditionOptions.style.display = 'flex';
                     } else if (this.value === '沙箱检测') {
-                        // 沙箱检测的特殊处理 - 实现多选功能
+                        // 沙箱检测的特殊处理 - 仅显示二级选择框，不再显示三级选择框
                         conditionOptions.innerHTML = `
                             <select class="select-input sandbox-type-select">
                                 <option>选择沙箱检测类型</option>
-                                <option>威胁等级</option>
-                                <option>威胁分类</option>
+                                <option>进行过沙箱检查</option>
+                                <option>没有进行过沙箱检查</option>
                             </select>
-                            <div class="sandbox-value-container" style="display: none;">
+                            <!-- 三级选择框已禁用，以下代码注释保留以便后续可能的功能恢复 -->
+                            <!-- <div class="sandbox-value-container" style="display: none;">
                                 <div class="multi-select-container">
                                     <div class="multi-select-input" placeholder="请选择值">
                                         <div class="selected-values"></div>
                                     </div>
                                     <div class="multi-select-dropdown" style="display: none;"></div>
                                 </div>
-                            </div>
+                            </div> -->
                         `;
                         conditionOptions.style.display = 'flex';
                         
                         // 为沙箱检测类型选择框添加事件监听
                         const sandboxTypeSelect = conditionOptions.querySelector('.sandbox-type-select');
-                        const sandboxValueContainer = conditionOptions.querySelector('.sandbox-value-container');
                         
                         sandboxTypeSelect.addEventListener('change', function() {
-                            if (this.value === '威胁等级' || this.value === '威胁分类') {
-                                sandboxValueContainer.style.display = 'block';
-                                
-                                // 初始化多选组件
-                                const multiSelectContainer = sandboxValueContainer.querySelector('.multi-select-container');
-                                const multiSelectInput = multiSelectContainer.querySelector('.multi-select-input');
-                                const multiSelectDropdown = multiSelectContainer.querySelector('.multi-select-dropdown');
-                                const selectedValues = multiSelectContainer.querySelector('.selected-values');
-                                
-                                // 清空之前的内容
-                                multiSelectDropdown.innerHTML = '';
-                                selectedValues.innerHTML = '';
-                                
-                                // 添加占位符文本
-                                const placeholderText = document.createElement('span');
-                                placeholderText.className = 'placeholder-text';
-                                placeholderText.textContent = multiSelectInput.getAttribute('placeholder');
-                                selectedValues.appendChild(placeholderText);
-                                
-                                // 根据选择的类型填充选项
-                                let options = [];
-                                if (this.value === '威胁等级') {
-                                    options = [
-                                        { value: '0', text: '安全' },
-                                        { value: '1', text: '低风险' },
-                                        { value: '2', text: '中风险' },
-                                        { value: '3', text: '高风险' }
-                                    ];
-                                } else if (this.value === '威胁分类') {
-                                    options = [
-                                        { value: '0', text: '未定义' },
-                                        { value: '1', text: '病毒' },
-                                        { value: '2', text: '蠕虫' },
-                                        { value: '3', text: '木马' },
-                                        { value: '4', text: '后门' },
-                                        { value: '5', text: '漏洞' },
-                                        { value: '6', text: '黑客工具' },
-                                        { value: '7', text: '恶意软件' },
-                                        { value: '8', text: '广告软件' },
-                                        { value: '9', text: '色情' },
-                                        { value: '10', text: '风险软件' },
-                                        { value: '11', text: '间谍软件' },
-                                        { value: '12', text: '勒索者病毒' }
-                                    ];
-                                }
-                                
-                                // 填充下拉选项
-                                options.forEach(option => {
-                                    const optionElement = document.createElement('div');
-                                    optionElement.className = 'multi-select-option';
-                                    optionElement.dataset.value = option.value;
-                                    optionElement.innerHTML = `
-                                        <input type="checkbox" value="${option.value}">
-                                        <span>${option.text}</span>
-                                    `;
-                                    multiSelectDropdown.appendChild(optionElement);
-                                });
-                                
-                                // 点击输入框显示/隐藏下拉菜单
-                                multiSelectInput.addEventListener('click', function() {
-                                    multiSelectDropdown.style.display = multiSelectDropdown.style.display === 'none' ? 'block' : 'none';
-                                });
-                                
-                                // 点击选项进行选择
-                                multiSelectDropdown.addEventListener('change', function(e) {
-                                    if (e.target.type === 'checkbox') {
-                                        const value = e.target.value;
-                                        const text = e.target.nextElementSibling.textContent;
-                                        
-                                        if (e.target.checked) {
-                                            // 添加选中值
-                                            const selectedItem = document.createElement('div');
-                                            selectedItem.className = 'selected-item';
-                                            selectedItem.dataset.value = value;
-                                            selectedItem.innerHTML = `
-                                                <span>${text}</span>
-                                                <button class="remove-selected">&times;</button>
-                                            `;
-                                            selectedValues.appendChild(selectedItem);
-                                            
-                                            // 移除按钮事件
-                                            selectedItem.querySelector('.remove-selected').addEventListener('click', function() {
-                                                selectedItem.remove();
-                                                // 取消对应的复选框
-                                                const checkbox = multiSelectDropdown.querySelector(`input[value="${value}"]`);
-                                                if (checkbox) {
-                                                    checkbox.checked = false;
-                                                }
-                                                // 更新输入框显示
-                                                updateMultiSelectInput();
-                                            });
-                                        } else {
-                                            // 移除选中值
-                                            const selectedItem = selectedValues.querySelector(`[data-value="${value}"]`);
-                                            if (selectedItem) {
-                                                selectedItem.remove();
-                                            }
-                                        }
-                                        
-                                        // 更新输入框显示
-                                        updateMultiSelectInput();
-                                    }
-                                });
-                                
-                                // 更新多选输入框显示
-                                function updateMultiSelectInput() {
-                                    const selectedItems = selectedValues.querySelectorAll('.selected-item');
-                                    if (selectedItems.length === 0) {
-                                        // 如果没有选中项，显示占位符
-                                        if (selectedValues.children.length === 0) {
-                                            const placeholderText = document.createElement('span');
-                                            placeholderText.className = 'placeholder-text';
-                                            placeholderText.textContent = multiSelectInput.getAttribute('placeholder');
-                                            selectedValues.appendChild(placeholderText);
-                                        }
-                                        multiSelectInput.style.color = '#999';
-                                    } else {
-                                        // 如果有选中项，移除占位符
-                                        const placeholderText = selectedValues.querySelector('.placeholder-text');
-                                        if (placeholderText) {
-                                            placeholderText.remove();
-                                        }
-                                        multiSelectInput.style.color = '#333';
-                                    }
-                                }
-                                
-                                // 点击外部关闭下拉菜单
-                                document.addEventListener('click', function(e) {
-                                    if (!multiSelectContainer.contains(e.target)) {
-                                        multiSelectDropdown.style.display = 'none';
-                                    }
-                                });
-                            } else {
-                                sandboxValueContainer.style.display = 'none';
-                            }
+                            // 仅处理二级选择框的选择，不再显示三级选择框
+                            console.log('沙箱检测类型已选择:', this.value);
                         });
                     } else {
                         conditionOptions.style.display = 'none';
